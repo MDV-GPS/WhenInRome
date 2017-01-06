@@ -28,19 +28,9 @@ let itinerarySchema = new mongoose.Schema({
     author: String,
     authorLocation: String,
     authorZip: String,
-    stop1placeName: String,
-    stop1location: String,
-    stop1description: String,
-    stop2placeName: String,
-    stop2location: String,
-    stop2description: String,
-    stop3placeName: String,
-    stop3location: String,
-    stop3description: String,
-    stop4placeName: String,
-    stop4location: String,
-    stop4description: String
-})
+    stops: [{placeName: String, location: String, description: String}],
+    created: { type: Date, default: Date.now }
+});
 
 let Itinerary = mongoose.model('Itinerary', itinerarySchema);
 // ***END OF DATABASE SETUP ***

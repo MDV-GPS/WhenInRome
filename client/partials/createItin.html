@@ -2,7 +2,7 @@
   <h1>Create Itinerary</h1>
 
   <!--FORM CONTAINS ALL OF THE -->
-  <form ng-controller="createController">
+  <form ng-controller="createItinController">
 
     <!--AREA TO SET AUTHOR, ROUTE AND STARTING LOCATION-->
     <input ng-change="updateScope('author', author)" type="text" ng-model="author" placeholder="Your Name Here"></br>
@@ -52,7 +52,7 @@
 
 
 
-      <!--FIELDSET FOR SPOT 1-->
+      <!--FIELDSET FOR SPOT 2-->
       <fieldset data-ng-repeat="spot in spots">
         <h3>Stop 2:</h3>
         <input places-auto-complete type="text" ng-model="stop2placeName" type="text" placeholder="Place Name" ng-change="updateScope('stop2placeName', stop2placeName)">

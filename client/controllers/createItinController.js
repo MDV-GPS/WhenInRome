@@ -1,8 +1,8 @@
 angular
-  .module('solo.createController', ['ngRoute', 'ngMap', 'solo.ItinFactory'])
-  .controller('createController', createController);
+  .module('solo.createItinController', ['ngRoute', 'ngMap', 'solo.ItinFactory'])
+  .controller('createItinController', createItinController);
 
-function createController($scope, $location, ItinFactory, $http) {
+function createItinController($scope, $location, ItinFactory, $http) {
   //$SCOPE.SPOTS WAS ADDED FOR ADDNEWSPOT FUNCTION
   $scope.spots = ['spot1'];
 
@@ -18,9 +18,9 @@ function createController($scope, $location, ItinFactory, $http) {
   //   $scope.spots.splice(lastItem);
   // }
 
-  //UPDATESCOPE SETS THE SCOPE FROM NG-CHANGE INPUTS IN THE CREATE.HTML FILE
+  //UPDATESCOPE SETS THE SCOPE FROM NG-CHANGE INPUTS IN THE CREATEITN.HTML FILE
   $scope.updateScope = function(inputName, inputValue){
-    //console.log(inputName, inputValue)
+    console.log(inputName, inputValue)
     $scope[inputName] = inputValue;
    // console.log($scope[inputName])
   }
@@ -32,18 +32,7 @@ function createController($scope, $location, ItinFactory, $http) {
       $scope.author,
       $scope.authorLocation,
       $scope.authorZip,
-      $scope.stop1placeName,
-      $scope.stop1location,
-      $scope.stop1description,
-      $scope.stop2placeName,
-      $scope.stop2location,
-      $scope.stop2description,
-      $scope.stop3placeName,
-      $scope.stop3location,
-      $scope.stop3description,
-      $scope.stop4placeName,
-      $scope.stop4location,
-      $scope.stop4description
+      $scope.stops
     ).success(function() {
        alert('Itinerary Created!!!')
     })
