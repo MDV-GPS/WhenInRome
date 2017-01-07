@@ -20,4 +20,3 @@ function ItinFactory($http) {
     }
   }
 }
-

@@ -102,4 +102,6 @@ fieldset {
   border: none;
 }
 
-
+#loginContainer {
+  text-align: center
+}

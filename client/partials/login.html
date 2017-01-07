@@ -1,0 +1,33 @@
+
+<div id="loginContainer">
+	<h1>When in Rome</h1>
+
+
+	<div id="logindiv">
+		<h2 class="title1"> Login </h2>
+
+
+		<form ng-submit='loginFunc(username, password)'>
+			Username: <input ng-model="username" id='username'/><br/>
+			Password: <input ng-model="password" id='password'/><br/>
+			<button type="submit">Submit</button>
+		</form>
+
+
+	</div>
+
+		<div id="signupdiv">
+			<h2 class="title1"> Sign up if you are new </h2>
+
+
+		<form ng-submit='signupFunc(createUsername, createPassword, createZipcode, createInterest)'>
+			Username: <input ng-model="createUsername" id='createUsername'/><br/>
+			Password: <input ng-model="createPassword" id='createPassword'/><br/>
+			Zipcode: <input ng-model="createZipcode" id='createZipcode'/><br/>
+			Interest: <input ng-model="createInterest" id='createInterest'/><br/>
+
+			<button type="submit">Submit</button>
+		</form>
+		</div>
+
+</div>
