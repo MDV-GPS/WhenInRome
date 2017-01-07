@@ -1,8 +1,8 @@
 angular
-  .module('solo.loginController', ['ngRoute'])//will need http factory to work
-  .controller('loginController', loginController);
+  .module('solo.loginController', ['ngRoute', 'HttpFactory'])//will need http factory to work
+  .controller('loginController', ['$scope', '$window', 'HttpFactory', loginController]);
 
-  function loginController($scope, $window){
+  function loginController($scope, $window, HttpFactory){
 
   	// $scope.dummy = function(){
   	// 	//$window.location.href = '#/home'
@@ -13,9 +13,9 @@ angular
   	// 	console.log($scope.createUsername, $scope.createPassword, $scope.createZipcode, $scope.createInterest)
 
   	// }
-  	
+
   	$scope.loginFunc = function(){
-  		$Http.userValid($scope.username, $scope.password).then(
+  		HttpFactory.userValid($scope.username, $scope.password).then(
   			function(data){
   				if (data){
   					$window.location.href = '#/home'
@@ -25,10 +25,10 @@ angular
   				}
   			}
   		)
-  		
+
   	};
   	$scope.signupFunc = function(){
-  		$Http.createUser($scope.createUsername, $scope.createPassword, $scope.createZipcode, $scope.createInterest).then(
+  		HttpFactory.userCreate($scope.createUsername, $scope.createPassword, $scope.createZipcode, $scope.createInterest).then(
 
   			function(data){
   				if (data){
