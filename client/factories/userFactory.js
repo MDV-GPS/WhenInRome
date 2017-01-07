@@ -1,8 +1,8 @@
 angular
   .module('UserFactory', ['UserFactory'])
-  .factory('UserFactory', [userFactory]);
+  .factory('UserFactory', [UserFactory]);
 
-  function userFactory(){
+  function UserFactory(){
     return {
       username: 'Local',
       password: 'default',
