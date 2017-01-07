@@ -16,7 +16,6 @@ function configFunction($routeProvider, $locationProvider) {
       templateUrl: './partials/feed.html',
       controller: 'feedController',
     })
-      
       .when('/createItin', {
         templateUrl: './partials/createItin.html',
         controller: 'createItinController',
@@ -25,5 +24,9 @@ function configFunction($routeProvider, $locationProvider) {
         templateUrl: './partials/login.html',
         controller: 'loginController'
       })
+      .when('/itinerary', {
+        templateUrl: './partials/itinerary.html',
+        controller: 'ItineraryController'
+      });
 
 }

@@ -1,8 +1,12 @@
 
 <div id="homeContainer">
-
-<h1 class="title1"> Let a local be your guide </h1>
-<h2>Show me what the locals recommend</h2>
+  <div id="menu">
+    <a ng-href="/#/home">Home</a>
+    <a ng-href="/#/createItin">Design Itinerary</a>
+  </div>
+  <input type='button' class='profile-button' ng-click='openProfile' ng-value='username' />
+  <!-- <img class='rome-button' src='http://romanmedicine.co.uk/files/2013/04/Galen2.png' alt='Do as they do' /> -->
+  <h2 class='locals-recommend'>Show me what the locals recommend</h2>
 
 <!--The below utilizes the ngmap places-auto-complete directive
   https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/docs/index.html-->
@@ -16,17 +20,24 @@
 
 <button ng-click="searchLocation(location)" ng-route='/#/feed'> Search </button>
 
-<div id="recentlyCreated">
-  <h3>Last Three Created Itineraries</h3>
-  <span ng-repeat='obj in lastThree'><b>{{obj.title}}</b>: {{obj.author}} //</span>
-</div>
 
 <!--The below utilizes the ngmap map-lazy-load directive
   https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/docs/index.html-->
-<div map-lazy-load="https://maps.google.com/maps/api/js">
+<div class='google-map' map-lazy-load="https://maps.google.com/maps/api/js">
   <map center={{location}} zoom="10">
     <marker position={{location}}></marker>
   </map>
+</div>
+
+<div id="recentlyCreated">
+  <h3>Recent Itineraries</h3>
+  <div>
+  <!-- <span ng-repeat='obj in lastThree'><b>{{obj.title}}</b>: {{obj.author}} //</span> -->
+    <div class='recentItin' ng-style='landscapes[$index]'  ng-repeat='obj in lastThree track by $index'>
+      <span class='recentTitle'>{{obj.title}}</span>
+      <span class='recentAuthor'>{{obj.author}}</span>
+    </div>
+  </div>
 </div>
 
 

@@ -31,7 +31,10 @@ db.on('error', console.error.bind(console, 'connection error: '));
 
 // GET request to /itins serves up ALL itins in DB. You can also see at http://localhost:3000/itins
 app.get('/itins', function(req, res) {
-  Models.Itinerary.find({}, function(err, itins){res.send(itins)});
+  Models.Itinerary.find({}, function(err, itins){
+    if(err) return console.error(err);
+    res.json(itins);
+  });
 });
 
 app.post('/create', function(req, res) {
@@ -66,7 +69,7 @@ app.post('/user/valid', (req, res) =>{
     if(err) return console.error(err);
     if(!user) return res.json('Something is entered incorrectly!!!!!!!');
     if(user.password === req.body.password){
-      res.json(true);
+      res.json(user);
       return;
     }
     res.json('Something is entered incorrectly!!!!!!!');
