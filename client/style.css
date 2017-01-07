@@ -80,3 +80,7 @@ button {
   border: 1px solid white;
   color: white;
 }
+
+#loginContainer {
+  text-align: center
+}
