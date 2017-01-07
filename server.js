@@ -15,7 +15,8 @@ app.use(bodyParser.json());
 
 // Using a Hosted MongoDB @ https://mlab.com/ account.
 // You can use login info below to access mlab.com portal to add additional user accounts.
-mongoose.connect('mongodb://nmarentes:beekeepers17@ds049211.mlab.com:49211/nativeapp')
+mongoose.connect('mongodb://nmarentes:beekeepers17@ds049211.mlab.com:49211/nativeapp');
+//mongoose.connect('mongodb://dhanimay:http99@ds023932.mlab.com:23932/wheninrome');
 
 const db = mongoose.connection.once('open', () => {
     console.log('Connected to mongodb with mongoose');
@@ -39,23 +40,33 @@ app.post('/create', function(req, res) {
 });
 
 app.post('/user/create', (req, res) =>{
-  Models.User.find({username: req.body.username}, (err, user) =>{
+  Models.User.findOne({username: req.body.username}, (err, user) =>{
     if(err) return console.error(err);
-    if(!user) res.json('User exists.');
+    if(user){
+      res.json('User exists.');
+      return;
+    }
 
-    Models.User.create(req.body.username, (err, created) =>{
+
+    Models.User.create(req.body, (err, created) =>{
       if(err) return console.error(err);
-      if(created) res.json(created);
+      if(created){
+        res.json(created);
+        return;
+      }
       res.json("Account could not be created.");
     });
   });
 });
 
 app.post('/user/valid', (req, res) =>{
-  Models.User.find({username: req.body.username}, (err, user) =>{
+  Models.User.findOne({username: req.body.username}, (err, user) =>{
     if(err) return console.error(err);
     if(!user) return res.json('Something is entered incorrectly!!!!!!!');
-    if(user.password === req.body.password) res.json(true);
+    if(user.password === req.body.password){
+      res.json(true);
+      return;
+    }
     res.json('Something is entered incorrectly!!!!!!!');
   });
 });
@@ -63,5 +74,3 @@ app.post('/user/valid', (req, res) =>{
 app.listen(3000, () => {
     console.log('Listening on port 3000');
 });
-
-
