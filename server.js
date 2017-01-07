@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -25,25 +26,6 @@ const db = mongoose.connection.once('open', () => {
 });
 
 db.on('error', console.error.bind(console, 'connection error: '));
-
-let stopSchema = new mongoose.Schema({
-  placeName: String,
-  location: String,
-  description: String,
-  stopNumber: Number
-})
-
-let itinerarySchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  authorLocation: String,
-  authorZip: String,
-  stops: [stopSchema],
-  created: { type: Date, default: Date.now }
-});
-
-let Itinerary = mongoose.model('Itinerary', itinerarySchema);
-
 
 // ***END OF DATABASE SETUP ***
 
