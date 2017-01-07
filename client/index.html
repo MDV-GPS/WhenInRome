@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
-  <title>Native App</title>
+  <title>When In Rome</title>
 
   <script type="text/javascript" src="angular/angular.min.js"></script>
   <script src="ngmap/build/scripts/ng-map.min.js"></script>
   <script type="text/javascript" src="angular-route/angular-route.min.js"></script>
   <script type="text/javascript" src="./controllers/homeController.js"></script>
-  <script type="text/javascript" src="./app.js"></script>
   <script type="text/javascript" src="./controllers/feedController.js"></script>
   <script type="text/javascript" src="./controllers/createController.js"></script>
+  <script type='text/javascript' src='./factories/userFactory.js'></script>
+  <script type='text/javascript' src='./factories/httpFactory.js'></script>
   <script type="text/javascript" src="./factories/itinFactory.js"></script>
+  <script type="text/javascript" src="./app.js"></script>
 
 <!-- google maps API injection -->
 <!--INSERTING GOOGLE Autocomplete-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRjb5435OyNsX2BO4QM7vR-84vvUuzTBM&libraries=places,geometry"></script>
 <!--END OF GOOGLE Autocomplete-->
-
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
-  <link rel="stylesheet" href="style.css">
 
 <!-- hardcoded menu above angular app view -->
     <div id="menu">
