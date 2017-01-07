@@ -9,18 +9,16 @@ function createItinController($scope, $location, ItinFactory, $http) {
   ///$scope.location needs to be defined
   $scope.addStop= function(){
     $scope.stops.push({placeName: $scope.placeName , location: $scope.location , description: $scope.description, stopNumber: $scope.stops.length + 1 })
-    console.log($scope.stops);
   }
  
-  //REMOVECHOICE LETS YOU REMOVE THOSE STOPS ON THE ITINERARY
-  // $scope.removeChoice = function(){
-  //   let lastItem = $scope.spots.length-1;
-  //   $scope.spots.splice(lastItem);
-  // }
+  //REMOVESTOP LETS YOU REMOVE A STOP ON THE ITINERARY
+  $scope.removeStop = function(i){
+    console.log('remove at: ', i);
+    $scope.stops.splice(i, 1);
+  }
 
   //UPDATESCOPE SETS THE SCOPE FROM NG-CHANGE INPUTS IN THE CREATEITN.HTML FILE
   $scope.updateScope = function(inputName, inputValue){
-    console.log(inputName, inputValue)
     $scope[inputName] = inputValue;
    // console.log($scope[inputName])
   }
