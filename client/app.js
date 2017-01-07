@@ -1,6 +1,7 @@
 
 const app = angular
-  .module('myApp', ['ngRoute', 'solo.HomeController','solo.feedController', 'solo.ItinFactory', 'solo.createController', 'solo.loginController']);
+  .module('myApp', ['ngRoute', 'solo.HomeController','solo.feedController',
+  'solo.ItinFactory', 'solo.createController', 'solo.loginController', 'UserFactory', 'HttpFactory']);
 
 app.config(configFunction);
 
