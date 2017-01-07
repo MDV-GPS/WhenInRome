@@ -1,26 +1,24 @@
 angular
-  .module('solo.createController', ['ngRoute', 'ngMap', 'solo.ItinFactory'])
-  .controller('createController', createController);
+  .module('solo.createItinController', ['ngRoute', 'ngMap', 'solo.ItinFactory'])
+  .controller('createItinController', createItinController);
 
-function createController($scope, $location, ItinFactory, $http) {
-  //$SCOPE.SPOTS WAS ADDED FOR ADDNEWSPOT FUNCTION
-  $scope.spots = ['spot1'];
-
-  //ADDNEWSPOT LETS YOU ADD ADDITIONAL STOPS ON THE ITINERARY
-  // $scope.addNewSpot= function(){
-  //   let newItemNo = $scope.spots.length+1;
-  //   $scope.spots.push('spot'+newItemNo);
-  // }
+function createItinController($scope, $location, ItinFactory, $http) {
+  //HOLDS ALL STOPS ADDED TO ITINERARY
+  $scope.stops = []
+  //ADDSTOP LETS YOU ADD ADDITIONAL STOPS ON THE ITINERARY
+  ///$scope.location needs to be defined
+  $scope.addStop= function(){
+    $scope.stops.push({placeName: $scope.placeName , location: $scope.location , description: $scope.description, stopNumber: $scope.stops.length + 1 })
+  }
  
-  //REMOVECHOICE LETS YOU REMVOE THOSE STOPS ON THE ITINERARY
-  // $scope.removeChoice = function(){
-  //   let lastItem = $scope.spots.length-1;
-  //   $scope.spots.splice(lastItem);
-  // }
+  //REMOVESTOP LETS YOU REMOVE A STOP ON THE ITINERARY
+  $scope.removeStop = function(i){
+    console.log('remove at: ', i);
+    $scope.stops.splice(i, 1);
+  }
 
-  //UPDATESCOPE SETS THE SCOPE FROM NG-CHANGE INPUTS IN THE CREATE.HTML FILE
+  //UPDATESCOPE SETS THE SCOPE FROM NG-CHANGE INPUTS IN THE CREATEITN.HTML FILE
   $scope.updateScope = function(inputName, inputValue){
-    //console.log(inputName, inputValue)
     $scope[inputName] = inputValue;
    // console.log($scope[inputName])
   }
@@ -32,18 +30,7 @@ function createController($scope, $location, ItinFactory, $http) {
       $scope.author,
       $scope.authorLocation,
       $scope.authorZip,
-      $scope.stop1placeName,
-      $scope.stop1location,
-      $scope.stop1description,
-      $scope.stop2placeName,
-      $scope.stop2location,
-      $scope.stop2description,
-      $scope.stop3placeName,
-      $scope.stop3location,
-      $scope.stop3description,
-      $scope.stop4placeName,
-      $scope.stop4location,
-      $scope.stop4description
+      $scope.stops
     ).success(function() {
        alert('Itinerary Created!!!')
     })

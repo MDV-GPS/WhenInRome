@@ -22,12 +22,20 @@ a {
 }
 
 
-/*STYLES FOR HOME AND CREATE */
-  #homeContainer, #createItinContainer {
+/*STYLE FOR HOME */
+#homeContainer {
+  text-align: center;
+  margin: auto;
+  background-color: rgb(38, 61, 96);
+}
+
+/*STYLE FOR CREATE */
+#createItinContainer {
     text-align: center;
     margin: auto;
     background-color: rgb(38, 61, 96);
-  }
+}
+
 
   /*END OF STYLES FOR HOME*/
 
@@ -58,11 +66,20 @@ a {
 }
 
 /*STYLES FOR ITINERARY STOP CREATOR*/
+.map {
+  width: 75%;
+  margin: 0 auto;
+}
+
 .itinCreator{
   display:flex;
+  flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
-  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+#add-stop, #current-stops {
+  width: 45%;
 }
 
 .description{
@@ -79,6 +96,10 @@ button {
   background: none;
   border: 1px solid white;
   color: white;
+}
+
+fieldset {
+  border: none;
 }
 
 #loginContainer {

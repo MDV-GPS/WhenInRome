@@ -1,7 +1,7 @@
 
 const app = angular
   .module('myApp', ['ngRoute', 'solo.HomeController','solo.feedController',
-  'solo.ItinFactory', 'solo.createController', 'solo.loginController', 'UserFactory', 'HttpFactory']);
+  'solo.ItinFactory', 'solo.createItinController', 'solo.loginController', 'UserFactory', 'HttpFactory']);
 
 app.config(configFunction);
 
@@ -18,8 +18,8 @@ function configFunction($routeProvider, $locationProvider) {
     })
       
       .when('/createItin', {
-        templateUrl: './partials/create.html',
-        controller: 'createController',
+        templateUrl: './partials/createItin.html',
+        controller: 'createItinController',
       })
       .when('/', {
         templateUrl: './partials/login.html',
