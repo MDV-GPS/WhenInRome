@@ -9,6 +9,10 @@ head, title{
 html, body {
   background-color: rgb(38, 61, 96);
   color: white;
+  background-image: url('http://www.domusdiana.it/skyline.png');
+  background-size: 1000px 200px;
+  background-repeat: no-repeat;
+  background-position:bottom;
 }
 
 a {
@@ -172,5 +176,32 @@ fieldset {
 }
 
 #loginContainer {
-  text-align: center
+  text-align: center;
+  
+
+}
+
+#loginError{
+  padding: 10px;
+  height: 40px;
+  width: 290px;
+  background-color: white;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 20px;
+  color:red
+}
+
+.logButton {
+  margin-top: 15px
+}
+
+#big {
+  display:none;
+
+}
+
+#dig {
+  margin-top: 20px;
+  display: none;
 }
