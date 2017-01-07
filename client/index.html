@@ -11,41 +11,20 @@
   <script type="text/javascript" src="angular-route/angular-route.min.js"></script>
   <script type="text/javascript" src="./controllers/homeController.js"></script>
   <script type="text/javascript" src="./controllers/feedController.js"></script>
-  <script type="text/javascript" src="./controllers/createItinController.js"></script>
   <script type="text/javascript" src="./controllers/loginController.js"></script>
+  <script type="text/javascript" src="./controllers/createItinController.js"></script>
+  <script type="text/javascript" src="./controllers/itineraryController.js"></script>
   <script type='text/javascript' src='./factories/userFactory.js'></script>
   <script type='text/javascript' src='./factories/httpFactory.js'></script>
   <script type="text/javascript" src="./factories/itinFactory.js"></script>
   <script type="text/javascript" src="./app.js"></script>
 
-
-
 <!-- google maps API injection -->
 <!--INSERTING GOOGLE Autocomplete-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRjb5435OyNsX2BO4QM7vR-84vvUuzTBM&libraries=places,geometry"></script>
 <!--END OF GOOGLE Autocomplete-->
-
-<!-- hardcoded menu above angular app view -->
-    <div id="menu">
-
-      
-
-
-
-      <!-- <div id="logo">LOGO</div> -->
-
-
-
-
-    </div>
-
 </head>
 <body ng-app='myApp'>
   <div class="container" ng-view></div>
-
-
-
-
-
 </body>
 </html>
