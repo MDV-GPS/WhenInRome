@@ -36,65 +36,23 @@
 
 
       <!--FIELDSET FOR SPOT 1-->
-      <fieldset data-ng-repeat="spot in spots">
-        <h3>Stop 1:</h3>
-        <input places-auto-complete type="text" ng-model="stop1placeName" type="text" placeholder="Place Name" ng-change="updateScope('stop1placeName', stop1placeName)">
-        <textarea ng-change="updateScope('stop1description', stop1description )" rows="3" cols="2" type="text" class="description"
-          ng-model="stop1description" type="text" placeholder="Description"></textarea>
+      <fieldset>
+        <h3>Add Stop:</h3>
+        <input places-auto-complete type="text" ng-model="placeName" type="text" placeholder="Place Name" ng-change="updateScope('placeName', placeName)">
+        <textarea ng-change="updateScope('description', description )" rows="3" cols="2" type="text" class="description"
+          ng-model="description" type="text" placeholder="Description"></textarea>
+        <button ng-click="addStop()" type="submit">Add Stop</button>
         <!--<button class="remove" ng-show="$last" ng-click="removeChoice()">Remove Spot</button>-->
       </fieldset>
       <!--END OF FIELDSET FOR SPOT 1-->
 
-
-
       <!--<button class="addSpot" ng-click="addNewSpot()">add a spot</button>-->
       </br>
-
-
-
-      <!--FIELDSET FOR SPOT 2-->
-      <fieldset data-ng-repeat="spot in spots">
-        <h3>Stop 2:</h3>
-        <input places-auto-complete type="text" ng-model="stop2placeName" type="text" placeholder="Place Name" ng-change="updateScope('stop2placeName', stop2placeName)">
-        <textarea ng-change="updateScope('stop2description', stop2description)" rows="3" cols="2" type="text" class="description"
-          ng-model="stop2description" type="text" placeholder="Description"></textarea>
-        <!--<button class="remove" ng-show="$last" ng-click="removeChoice()">Remove Spot</button>-->
-      </fieldset>
-      <!--END OF FIELDSET FOR SPOT 2-->
-
-
-      </br>
-
-
-      <!--FIELDSET FOR SPOT 3-->
-      <fieldset data-ng-repeat="spot in spots">
-        <h3>Stop 3:</h3>
-        <input places-auto-complete type="text" ng-model="stop3placeName" type="text" placeholder="Place Name" ng-change="updateScope('stop3placeName', stop3placeName )">
-        <textarea ng-change="updateScope('stop3description', stop3description)" rows="3" cols="2" type="text" class="description"
-          ng-model="stop3description" type="text" placeholder="Description"></textarea>
-        <!--<button class="remove" ng-show="$last" ng-click="removeChoice()">Remove Spot</button>-->
-      </fieldset>
-      <!--END OF FIELDSET FOR SPOT 3-->
-
-
-      </br>
-
-
-      <!--FIELDSET FOR SPOT 3-->
-      <fieldset data-ng-repeat="spot in spots">
-        <h3>Stop 4:</h3>
-        <input places-auto-complete type="text" ng-model="stop4placeName" type="text" placeholder="Place Name" ng-change="updateScope('stop4placeName', stop4placeName )">
-        <textarea ng-change="updateScope('stop4description', stop4description)" rows="3" cols="2" type="text" class="description"
-          ng-model="stop4description" type="text" placeholder="Description"></textarea>
-        <!--<button class="remove" ng-show="$last" ng-click="removeChoice()">Remove Spot</button>-->
-      </fieldset>
-    </div>
     <!--END OF SPOTS DIV-->
-
 
     <!--BUTTON SAVE - SAVES ALL SCOPED ITEMS THROUGH SAVE FUNCTION IN CREATE CONTROLLER-->
     <div>
-      <button ng-click="save()" type="submit">save your Itinerary</button>
+      <button ng-click="save()" type="submit">Save Your Itinerary</button>
     </div>
 
 

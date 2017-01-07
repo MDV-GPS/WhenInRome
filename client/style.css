@@ -22,12 +22,20 @@ a {
 }
 
 
-/*STYLES FOR HOME AND CREATE */
-  #homeContainer, #createItinContainer {
+/*STYLE FOR HOME */
+#homeContainer {
+  text-align: center;
+  margin: auto;
+  background-color: rgb(38, 61, 96);
+}
+
+/*STYLE FOR CREATE */
+#createItinContainer {
     text-align: center;
     margin: auto;
     background-color: rgb(38, 61, 96);
   }
+
 
   /*END OF STYLES FOR HOME*/
 
@@ -59,10 +67,12 @@ a {
 
 /*STYLES FOR ITINERARY STOP CREATOR*/
 .itinCreator{
+  position: absolute;
+  left: 5px;
   display:flex;
   align-items: flex-start;
   justify-content: center;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
 }
 
 .description{

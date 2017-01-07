@@ -18,18 +18,25 @@ app.use(bodyParser.json());
 mongoose.connect('mongodb://nmarentes:beekeepers17@ds049211.mlab.com:49211/nativeapp')
 
 let db = mongoose.connection.once('open', () => {
-    console.log('Connected to mongodb with mongoose');
+  console.log('Connected to mongodb with mongoose');
 });
 
 db.on('error', console.error.bind(console, 'connection error: '));
 
+let stopSchema = new mongoose.Schema({
+  placeName: String,
+  location: String,
+  description: String,
+  stopNumber: Number
+})
+
 let itinerarySchema = new mongoose.Schema({
-    title: String,
-    author: String,
-    authorLocation: String,
-    authorZip: String,
-    stops: [{placeName: String, location: String, description: String}],
-    created: { type: Date, default: Date.now }
+  title: String,
+  author: String,
+  authorLocation: String,
+  authorZip: String,
+  stops: [stopSchema],
+  created: { type: Date, default: Date.now }
 });
 
 let Itinerary = mongoose.model('Itinerary', itinerarySchema);
@@ -41,13 +48,13 @@ app.get('/itins', function(req, res) {
 });
 
 app.post('/create', function(req, res) {
-    console.log("Post REQ BODY:", req.body);
-    Itinerary.create(new Itinerary(req.body), function(err, created) {
-      if(err) return console.error(err);
-      res.send(req.body);
-    });
+  console.log("Post REQ BODY:", req.body);
+  Itinerary.create(new Itinerary(req.body), function(err, created) {
+    if(err) return console.error(err);
+    res.send(req.body);
+  });
 });
 
 app.listen(3000, () => {
-    console.log('Listening on port 3000');
+  console.log('Listening on port 3000');
 });

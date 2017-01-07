@@ -3,16 +3,16 @@ angular
   .controller('createItinController', createItinController);
 
 function createItinController($scope, $location, ItinFactory, $http) {
-  //$SCOPE.SPOTS WAS ADDED FOR ADDNEWSPOT FUNCTION
-  $scope.spots = ['spot1'];
-
-  //ADDNEWSPOT LETS YOU ADD ADDITIONAL STOPS ON THE ITINERARY
-  // $scope.addNewSpot= function(){
-  //   let newItemNo = $scope.spots.length+1;
-  //   $scope.spots.push('spot'+newItemNo);
-  // }
+  //HOLDS ALL STOPS ADDED TO ITINERARY
+  $scope.stops = []
+  //ADDSTOP LETS YOU ADD ADDITIONAL STOPS ON THE ITINERARY
+  ///$scope.location needs to be defined
+  $scope.addStop= function(){
+    $scope.stops.push({placeName: $scope.placeName , location: $scope.location , description: $scope.description, stopNumber: $scope.stops.length + 1 })
+    console.log($scope.stops);
+  }
  
-  //REMOVECHOICE LETS YOU REMVOE THOSE STOPS ON THE ITINERARY
+  //REMOVECHOICE LETS YOU REMOVE THOSE STOPS ON THE ITINERARY
   // $scope.removeChoice = function(){
   //   let lastItem = $scope.spots.length-1;
   //   $scope.spots.splice(lastItem);
