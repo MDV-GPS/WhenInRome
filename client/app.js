@@ -2,18 +2,18 @@
 const app = angular
   .module('myApp', ['ngRoute', 'solo.HomeController','solo.feedController',
   'solo.ItinFactory', 'solo.createItinController', 'solo.loginController', 'UserFactory', 'HttpFactory',
-  'ParamsFactory', 'FriendsController']);
+  'ParamsFactory', 'FriendsController', 'ProfileFactory']);
 
 app.config(configFunction);
 
 function configFunction($routeProvider, $locationProvider) {
 
   $routeProvider
-    .when('/home', {
+      .when('/home', {
       templateUrl: './partials/home.html',
       controller: 'HomeController',
     })
-    .when('/feed', {
+      .when('/feed', {
       templateUrl: './partials/feed.html',
       controller: 'feedController',
     })
