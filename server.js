@@ -12,6 +12,7 @@ app.use(express.static(path.join(__dirname, './client/')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(bodyParser.json());
+
 // ***DATABASE SETUP***
 // Using a Hosted MongoDB @ https://mlab.com/ account.
 // You can use login info below to access mlab.com portal to add additional user accounts.
@@ -22,6 +23,7 @@ const db = mongoose.connection.once('open', () => {
 });
 db.on('error', console.error.bind(console, 'connection error: '));
 // ***END OF DATABASE SETUP ***
+// Google Maps API Key: AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig
 // GET request to /itins serves up ALL itins in DB. You can also see at http://localhost:3000/itins
 app.get('/itins', function(req, res) {
   Models.Itinerary.find({}, function(err, itins){

@@ -9,11 +9,11 @@ app.config(configFunction);
 function configFunction($routeProvider, $locationProvider) {
 
   $routeProvider
-      .when('/home', {
+    .when('/home', {
       templateUrl: './partials/home.html',
       controller: 'HomeController',
     })
-      .when('/feed', {
+    .when('/feed', {
       templateUrl: './partials/feed.html',
       controller: 'feedController',
     })

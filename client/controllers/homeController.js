@@ -10,7 +10,7 @@ function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $w
   $scope.getLocation = function () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyDRjb5435OyNsX2BO4QM7vR-84vvUuzTBM')
+        $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
           .success(function (data) {
             console.log("Full Data returned from getLocation", data.results[0]);
             $scope.location = data.results[0].formatted_address;
@@ -25,7 +25,7 @@ function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $w
       return;
     }
     // Querying Geocode API to get ZIP code of {{location}} search input to pass to ItinFactory
-    $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyDRjb5435OyNsX2BO4QM7vR-84vvUuzTBM')
+    $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
       .success(function (data) {
         ItinFactory.searchZip = data.results[0].formatted_address.slice(-10).slice(0, 5);
       });
