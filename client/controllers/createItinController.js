@@ -1,24 +1,34 @@
 angular
   .module('solo.createItinController', ['ngRoute', 'ngMap', 'solo.ItinFactory'])
-  .controller('createItinController', ['$scope', '$location', '$http', 'ItinFactory', 'UserFactory', createItinController]);
+  .controller('createItinController', ['$scope', '$location', '$http', 'ItinFactory', 'UserFactory', 'ProfileFactory', createItinController]);
 
-function createItinController($scope, $location, $http, ItinFactory, UserFactory) {
+function createItinController($scope, $location, $http, ItinFactory, UserFactory, ProfileFactory) {
+  $scope.username = UserFactory.username;
+  $scope.menuStyle = '';
   //HOLDS ALL STOPS ADDED TO ITINERARY
-  $scope.stops = []
+  $scope.stops = [];
+
   //ADDSTOP LETS YOU ADD ADDITIONAL STOPS ON THE ITINERARY
-  ///$scope.location needs to be defined
-  $scope.addStop= function(){
-    const location = $scope.placeName.substr($scope.placeName.indexOf(', ') + 2);
-    const title = $scope.placeName.slice(0, $scope.placeName.indexOf(', '));
-    $scope.stops.push({
-      placeName: title,
-      location: location,
-      description: $scope.description,
-      stopNumber: $scope.stops.length + 1
-    });
-    console.log($scope.stops);
-  }
- 
+  $scope.addStop = function () {
+    $http.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + $scope.placeName + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
+      .success(function (data) {
+        $scope.location = data.results[0].formatted_address;
+      })
+      .then(function () {
+        const title = $scope.placeName.slice(0, $scope.placeName.indexOf(', '));
+        $scope.stops.push({
+          placeName: title,
+          location: $scope.location,
+          description: $scope.description,
+          stopNumber: $scope.stops.length + 1
+        });
+      })
+      .then(function () {
+        $scope.placeName = '';
+        $scope.description = '';
+      })
+  };
+
   //REMOVESTOP LETS YOU REMOVE A STOP ON THE ITINERARY
   $scope.removeStop = function(i){
     $scope.stops.splice(i, 1);
@@ -43,31 +53,43 @@ function createItinController($scope, $location, $http, ItinFactory, UserFactory
     })
   }
 
-  //SEARCHLOCATION IS MOSTLY USED TO CREATE authorZip WHICH IS REQUIRED TO FILTER THROUGH THE DATABASE FOR THE ZIPCODE
-   $scope.searchLocation = function (x) {
-     $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + x + '&key=AIzaSyDRjb5435OyNsX2BO4QM7vR-84vvUuzTBM')
-      .success(function (data) {
-        if(data.results.length) {
-          return data.results[0].geometry.location;
-          zip = data.results[0].formatted_address.slice(-10).slice(0,5); 
-        } else {
-          return data.results[0].geometry.location;
-        }
-      });
-  };
-
   //GETLOCATION ALLOWS US TO GET THE CURRENT POSITION OF THE USER AS WELL AS CREATE THE authorZip FROM GEOLOCATION
-   $scope.getLocation = function (loc) {
-    if (loc === 'nav') {
+  $scope.getLocation = function (loc, x) {
+    if (loc === 'cur') {
       navigator.geolocation.getCurrentPosition(function (position) {
-        $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyDRjb5435OyNsX2BO4QM7vR-84vvUuzTBM').success(function (data) {
+        $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
+        .success(function (data) {
           $scope.authorLocation= data.results[0].formatted_address;
           $scope.authorZip= data.results[0].formatted_address.slice(-10).slice(0,5);
           $scope.authorCoords = position.coords.latitude + ", " + position.coords.longitude;
         });
       });
     } else {
-      
+      $http.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + x + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
+      .success(function (data) {
+        $scope.authorLocation = data.results[0].formatted_address;
+        $scope.authorZip = data.results[0].formatted_address.slice(-10).slice(0, 5);
+        $scope.authorCoords = data.results[0].geometry.location.lat + ", " + data.results[0].geometry.location.lng;
+      });
+    }
+  }
+
+  $scope.gotoMyItineraries = ProfileFactory.gotoMyItineraries;
+  $scope.gotoFavorites = ProfileFactory.gotoFavorites;
+  $scope.gotoFriends = ProfileFactory.gotoFriends;
+  $scope.logout = ProfileFactory.logout;
+
+  $scope.clickDelegation = (event) =>{
+    if(event.target.className.indexOf('profile') === -1){
+      $scope.menuStyle = '';
+    }
+  };
+
+  $scope.openProfile = () =>{
+    if($scope.menuStyle === ''){
+      $scope.menuStyle = 'openMenu';
+    }else{
+      $scope.menuStyle = '';
     }
   };
 }

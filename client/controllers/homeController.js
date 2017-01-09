@@ -1,15 +1,17 @@
 angular
-  .module('solo.HomeController', ['ngRoute', 'ngMap', 'solo.ItinFactory', 'UserFactory'])
+  .module('solo.HomeController', ['ngRoute', 'ngMap', 'solo.ItinFactory',
+   'UserFactory', 'HttpFactory', 'ParamsFactory', 'ProfileFactory'])
   .controller('HomeController', HomeController);
 
-function HomeController($scope, ItinFactory, $http, UserFactory) {
-  $scope.username = UserFactory.username
+function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $window, ParamsFactory, ProfileFactory) {
+  $scope.username = UserFactory.username;
+  $scope.menuStyle = '';
 
   // getLocation uses HTML5 geolocation then passes those coords into google maps geocode to get a formatted address
   $scope.getLocation = function () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyDRjb5435OyNsX2BO4QM7vR-84vvUuzTBM')
+        $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
           .success(function (data) {
             console.log("Full Data returned from getLocation", data.results[0]);
             $scope.location = data.results[0].formatted_address;
@@ -24,7 +26,7 @@ function HomeController($scope, ItinFactory, $http, UserFactory) {
       return;
     }
     // Querying Geocode API to get ZIP code of {{location}} search input to pass to ItinFactory
-    $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyDRjb5435OyNsX2BO4QM7vR-84vvUuzTBM')
+    $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
       .success(function (data) {
         console.log("Geocode result", data)
         ItinFactory.searchZip = data.results[0].formatted_address.slice(-10).slice(0, 5);
@@ -41,16 +43,41 @@ function HomeController($scope, ItinFactory, $http, UserFactory) {
   // initializing pull of last three submitted itineraries
   $http.get('/itins').then(function (data) {
     let recent = data.data.slice(-3);
+
+    //HttpFactory.getLandscape('pig');
+
     $scope.landscapes = [
-      {'background': 'url(https://media-cdn.tripadvisor.com/media/photo-s/03/9b/2d/c3/chicago.jpg)'},
-      {'background': 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Beach_bikepath_in_the_Venice_Beach_park,_California.jpg/250px-Beach_bikepath_in_the_Venice_Beach_park,_California.jpg)'},
-      {'background': 'url(https://c.tadst.com/gfx/750x500/roman-calendar.jpg?1)'}
+      {'background-image': 'url(http://blog.worldcraze.com/wp-content/uploads/2016/03/road-trip-hillaryfox.jpg)'},
+      {'background-image': 'url(http://www.dailystormer.com/wp-content/uploads/2014/07/Walk-in-the-Park.jpg)'},
+      {'background-image': 'url(http://www.simwings.net/wp-content/uploads/2015/12/plane-flying.jpg)'}
     ];
 
-    //div.style.backgroundUrl = 'http://www.domusdiana.it/skyline.png';
-    //'https://www.google.com/search?q=' + 'mankey' + '&safe=off&biw=1484&bih=773&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjIhNn6tq_RAhWDOxoKHQfTDwIQ_AUIBigB';
     $scope.lastThree = recent;
   });
+
+  $scope.gotoMyItineraries = ProfileFactory.gotoMyItineraries;
+  $scope.gotoFavorites = ProfileFactory.gotoFavorites;
+  $scope.gotoFriends = ProfileFactory.gotoFriends;
+  $scope.logout = ProfileFactory.logout;
+
+  $scope.gotoItinerary = (itinerary) =>{
+    ParamsFactory.params = {type: 'other', name: itinerary};
+    $window.location.href = '#/itinerary';
+  }
+
+  $scope.clickDelegation = (event) =>{
+    if(event.target.className.indexOf('profile') === -1){
+      $scope.menuStyle = '';
+    }
+  };
+
+  $scope.openProfile = () =>{
+    if($scope.menuStyle === ''){
+      $scope.menuStyle = 'openMenu';
+    }else{
+      $scope.menuStyle = '';
+    }
+  };
 }
 
 

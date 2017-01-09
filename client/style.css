@@ -7,6 +7,7 @@ head, title{
 }
 
 html, body {
+  width: 100%;
   background-color: rgb(38, 61, 96);
   color: white;
   background-image: url('http://www.domusdiana.it/skyline.png');
@@ -34,9 +35,9 @@ a {
 /*STYLE FOR HOME */
 #homeContainer {
   text-align: center;
-  margin: auto;
+  margin: 0 auto;
   background-color: rgb(38, 61, 96);
-  position: relative;
+  /*overflow: hidden;*/
 }
 
 .profile-button{
@@ -47,11 +48,42 @@ a {
   color: inherit;
   border-radius: 2px;
   padding: 4px;
+  z-index: 100;
 }
 
 .profile-button:hover{
   /*color: rgb(38, 61, 96);*/
   background-color: #495d7a;
+}
+
+.profile-menu{
+  position: absolute;
+  right: 70px;
+  top: 17px;
+  width: 150px;
+  height: 0;
+  transition: height .4s;
+}
+
+.profile-menu ul{
+  list-style-type: none;
+  background-color: transparent;
+  height: 100%;
+  overflow: hidden;
+}
+
+.profile-menu li{
+  backgroud-color: white;
+  border-bottom: 1px solid gold;
+  text-align: center;
+  padding: 4px;
+  width: 100%;
+}
+
+.profile-menu li:hover{
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
 
 .rome-button{
@@ -66,6 +98,12 @@ a {
 
 .locals-recommend{
   padding-top: 3rem;
+}
+
+.current-search{
+  max-width: 300px;
+  margin: 10px auto;
+  height: 60px;
 }
 
 .google-map{
@@ -101,6 +139,8 @@ a {
   height: 200px;
   min-width: 200px;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .recentAuthor, .recentTitle{
@@ -190,7 +230,7 @@ fieldset {
 
 #loginContainer {
   text-align: center;
-  
+
 
 }
 
@@ -217,4 +257,45 @@ fieldset {
 #dig {
   margin-top: 20px;
   display: none;
+}
+
+.friends-container{
+  width: 90%;
+  margin: 0 auto;
+  padding: 5rem 0 0;
+}
+
+.friend-search{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.friendsList{
+  padding-top: 2rem;
+  list-style-type: none;
+}
+
+.friendsList li{
+  float: left;
+  width: 200px;
+  margin: 1rem;
+  text-align: center;
+  cursor: pointer;
+  background-color: #6a6aa5;
+  box-shadow: 0 0 1px white;
+}
+
+.friendsList li:hover{
+  box-shadow: 0 0 1px gold;
+}
+
+.profile-pic{
+  width: 100%;
+}
+
+.friend-success{
+  width: 200px;
+  margin: 1rem auto;
+  height: 30px;
 }

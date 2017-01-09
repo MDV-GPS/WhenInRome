@@ -1,4 +1,17 @@
 <div id="createItinContainer">
+  <div id="menu">
+    <a ng-href="/#/home">Home</a>
+    <a ng-href="/#/createItin">Create Itinerary</a>
+  </div>
+  <input type='button' class='profile-button' ng-click='openProfile()' ng-value='username' />
+  <div class='profile-menu'>
+    <ul ng-class='menuStyle'>
+      <li class='profile-itineraries-button' ng-click='gotoMyItineraries()'>My Itineraries</li>
+      <li class='profile-favorites-button' ng-click='gotoFavorites()'>Favorites</li>
+      <li class='profile-friends-button' ng-click='gotoFriends()'>Friends</li>
+      <li class='profile-logout-button' ng-click='logout()'>Logout</li>
+    </ul>
+  </div>
   <h1>Create Itinerary</h1>
 
   <!--FORM CONTAINS ALL OF THE -->
@@ -13,15 +26,15 @@
     />
     <h2>Where are we starting?</h2>
     <input
-      ng-change="updateScope('authorLocation', authorLocation)"
+      ng-change="updateScope('typedLocation', typedLocation)"
       places-auto-complete types="['geocode']"
-      ng-model="authorLocation"
+      ng-model="typedLocation"
       on-place-changed="myUnusedCallback(authorCoords)"
     />
     <!--SAVE LOCATION BUTTON IS REQUIRED FOR TYPED-IN LOCATIONS TO GET THE AUTHOR ZIPCODE-->
-    <button ng-click="searchLocation(authorLocation)"> Save Location </button></br>
+    <button ng-click="getLocation('save', typedLocation)"> Save Location </button></br>
     </br>
-    <button ng-click="getLocation('nav')" ng-model="authorLocation"> Use Current Location </button>
+    <button ng-click="getLocation('cur')"> Use Current Location </button>
     <p>
       Your Current Itinerary Area is around: </br>
       {{authorLocation}}

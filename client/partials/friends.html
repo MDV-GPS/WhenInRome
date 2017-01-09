@@ -1,0 +1,30 @@
+<div class='friends-container' ng-click='clickDelegation($event)'>
+  <div id="menu">
+    <a ng-href="/#/home">Home</a>
+    <a ng-href="/#/createItin">Design Itinerary</a>
+  </div>
+  <input type='button' class='profile-button' ng-click='openProfile()' ng-value='username' />
+  <div class='profile-menu'>
+    <ul ng-class='menuStyle'>
+      <li class='profile-itineraries-button' ng-click='gotoMyItineraries()'>My Itineraries</li>
+      <li class='profile-favorites-button' ng-click='gotoFavorites()'>Favorites</li>
+      <li class='profile-friends-button' ng-click='gotoFriends()'>Friends</li>
+      <li class='profile-logout-button' ng-click='logout()'>Logout</li>
+    </ul>
+  </div>
+  <div class='friend-search'>
+    Search for your friend:
+    <input type='text' class='friend-search-field' ng-model='inputFriend' />
+    <button type='button' class='friend-search-button' ng-click='findFriend(inputFriend)' />Search</button>
+    <br/>
+    <button type='button' ng-style='friendSuccess' ng-click='addFriendHandler()' class='friend-success'>{{friendMessage}}</span>
+  </div>
+  <ul class='friendsList'>
+    <li ng-repeat='friend in friends' ng-click='friendsItineraries(friend.username)'>
+      <img src='https://www.drupal.org/files/profile_default.png' class='profile-pic' alt=':)' />
+      <strong>{{friend.username}}<strong> <br/><br/>
+      <em>{{friend.zip}}</em> <br/>
+    </li>
+  </ul>
+
+</div>
