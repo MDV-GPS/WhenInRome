@@ -1,9 +1,11 @@
 angular
-  .module('FriendsController', ['ngRoute', 'solo.ItinFactory', 'UserFactory', 'HttpFactory', 'ParamsFactory'])
+  .module('FriendsController', ['ngRoute', 'solo.ItinFactory', 'UserFactory',
+   'HttpFactory', 'ParamsFactory', 'ProfileFactory'])
   .controller('FriendsController', controller);
 
-function controller($scope, ItinFactory, UserFactory, HttpFactory, $window, ParamsFactory) {
+function controller($scope, ItinFactory, UserFactory, HttpFactory, $window, ParamsFactory, ProfileFactory) {
   $scope.username = UserFactory.username;
+  $scope.menuStyle = '';
   $scope.friend = '';
   $scope.friendMessage = '';
   $scope.friendSuccess =  {visibility: 'hidden'};
@@ -50,4 +52,28 @@ function controller($scope, ItinFactory, UserFactory, HttpFactory, $window, Para
       }
     });
   }
+
+  $scope.gotoMyItineraries = ProfileFactory.gotoMyItineraries;
+  $scope.gotoFavorites = ProfileFactory.gotoFavorites;
+  $scope.gotoFriends = ProfileFactory.gotoFriends;
+  $scope.logout = ProfileFactory.logout;
+
+  $scope.friendsItineraries = (friend) =>{
+    ParamsFactory.params = {type: 'user', username: friend};
+    $window.location.href = '#/feed';
+  };
+
+  $scope.clickDelegation = (event) =>{
+    if(event.target.className.indexOf('profile') === -1){
+      $scope.menuStyle = '';
+    }
+  };
+
+  $scope.openProfile = () =>{
+    if($scope.menuStyle === ''){
+      $scope.menuStyle = 'openMenu';
+    }else{
+      $scope.menuStyle = '';
+    }
+  };
 }

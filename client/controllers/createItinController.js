@@ -1,8 +1,10 @@
 angular
   .module('solo.createItinController', ['ngRoute', 'ngMap', 'solo.ItinFactory'])
-  .controller('createItinController', ['$scope', '$location', '$http', 'ItinFactory', 'UserFactory', createItinController]);
+  .controller('createItinController', ['$scope', '$location', '$http', 'ItinFactory', 'UserFactory', 'ProfileFactory', createItinController]);
 
-function createItinController($scope, $location, $http, ItinFactory, UserFactory) {
+function createItinController($scope, $location, $http, ItinFactory, UserFactory, ProfileFactory) {
+  $scope.username = UserFactory.username;
+  $scope.menuStyle = '';
   //HOLDS ALL STOPS ADDED TO ITINERARY
   $scope.stops = [];
 
@@ -26,7 +28,7 @@ function createItinController($scope, $location, $http, ItinFactory, UserFactory
         $scope.description = '';
       })
   };
- 
+
   //REMOVESTOP LETS YOU REMOVE A STOP ON THE ITINERARY
   $scope.removeStop = function(i){
     $scope.stops.splice(i, 1);
@@ -71,4 +73,23 @@ function createItinController($scope, $location, $http, ItinFactory, UserFactory
       });
     }
   }
+
+  $scope.gotoMyItineraries = ProfileFactory.gotoMyItineraries;
+  $scope.gotoFavorites = ProfileFactory.gotoFavorites;
+  $scope.gotoFriends = ProfileFactory.gotoFriends;
+  $scope.logout = ProfileFactory.logout;
+
+  $scope.clickDelegation = (event) =>{
+    if(event.target.className.indexOf('profile') === -1){
+      $scope.menuStyle = '';
+    }
+  };
+
+  $scope.openProfile = () =>{
+    if($scope.menuStyle === ''){
+      $scope.menuStyle = 'openMenu';
+    }else{
+      $scope.menuStyle = '';
+    }
+  };
 }

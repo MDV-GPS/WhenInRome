@@ -139,6 +139,8 @@ a {
   height: 200px;
   min-width: 200px;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .recentAuthor, .recentTitle{
