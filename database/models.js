@@ -5,7 +5,9 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   zip: String,
-  interest: String
+  interest: String,
+  friends: [],
+  itineraries: []
 });
 
 const stopSchema = new mongoose.Schema({

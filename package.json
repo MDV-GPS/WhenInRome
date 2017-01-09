@@ -13,9 +13,11 @@
     "angular-material": "^1.1.1",
     "angular-mocks": "^1.6.1",
     "angular-route": "^1.6.1",
+    "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "ecstatic": "^0.8.0",
     "express": "^4.14.0",
+    "google-images-scraper": "^1.0.9",
     "mongoose": "^4.7.6",
     "ngmap": "^1.17.8",
     "nodemon": "^1.9.2"
