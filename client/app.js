@@ -8,25 +8,25 @@ app.config(configFunction);
 function configFunction($routeProvider, $locationProvider) {
 
   $routeProvider
-      .when('/home', {
+    .when('/home', {
       templateUrl: './partials/home.html',
       controller: 'HomeController',
     })
-      .when('/feed', {
+    .when('/feed', {
       templateUrl: './partials/feed.html',
       controller: 'feedController',
     })
-      .when('/createItin', {
-        templateUrl: './partials/createItin.html',
-        controller: 'createItinController',
-      })
-      .when('/', {
-        templateUrl: './partials/login.html',
-        controller: 'loginController'
-      })
-      .when('/itinerary', {
-        templateUrl: './partials/itinerary.html',
-        controller: 'ItineraryController'
-      });
+    .when('/createItin', {
+      templateUrl: './partials/createItin.html',
+      controller: 'createItinController',
+    })
+    .when('/', {
+      templateUrl: './partials/login.html',
+      controller: 'loginController'
+    })
+    .when('/itinerary', {
+      templateUrl: './partials/itinerary.html',
+      controller: 'ItineraryController'
+    });
 
 }
