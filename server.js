@@ -5,9 +5,12 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Models = require('./database/models');
+const cors = require('cors');
+
 app.use(express.static(path.join(__dirname, './node_modules/')));
 app.use(express.static(path.join(__dirname, './client/')));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 app.use(bodyParser.json());
 
 // ***DATABASE SETUP***
@@ -28,12 +31,14 @@ app.get('/itins', function(req, res) {
     res.json(itins);
   });
 });
+
 app.post('/create', function(req, res) {
     Models.Itinerary.create(req.body, function(err, created) {
       if(err) return console.error(err);
       res.send(req.body);
     });
 });
+
 app.post('/user/create', (req, res) =>{
   Models.User.findOne({username: req.body.username}, (err, user) =>{
     if(err) return console.error(err);
@@ -41,6 +46,7 @@ app.post('/user/create', (req, res) =>{
       res.json('User exists.');
       return;
     }
+
     Models.User.create(req.body, (err, created) =>{
       if(err) return console.error(err);
       if(created){
@@ -51,6 +57,7 @@ app.post('/user/create', (req, res) =>{
     });
   });
 });
+
 app.post('/user/valid', (req, res) =>{
   Models.User.findOne({username: req.body.username}, (err, user) =>{
     if(err) return console.error(err);
@@ -62,6 +69,43 @@ app.post('/user/valid', (req, res) =>{
     res.json('Something is entered incorrectly!!!!!!!');
   });
 });
+
+//FIXME does not search if a user already exists before adding
+app.post('/findFriend', (req, res) =>{
+    Models.User.findOne({username: req.body.friend}, (err, user) =>{
+        if(err) return console.error(err);
+        if(!user) return res.json(false);
+
+        res.json({username: user.username, zip: user.zip});
+    });
+});
+
+app.post('/addFriend', (req, res) =>{
+  Models.User.findOne({username: req.body.username}, (err, user) =>{
+    if(err) return console.error(err);
+
+    user.friends.push(req.body.friend.username);
+    Models.User.update({username: user.username}, {friends: user.friends},
+      (err, affected) =>{
+        if(err) return console.error(err);
+        return res.json(true);
+    });
+  });
+});
+
+app.post('/getFriends', (req, res) =>{
+    Models.User.findOne({username: req.body.username}, (err, user) =>{
+      if(err) return console.error(err);
+
+      Models.User.find({username: {$in: user.friends}}, (err, users) =>{
+        if(err) return console.error(err);
+        users = users.map((user) =>{ return {username: user.username, zip: user.zip}; });
+        return res.json(users);
+      });
+    });
+});
+
+
 app.listen(3000, () => {
   console.log('Listening on port 3000');
 });
