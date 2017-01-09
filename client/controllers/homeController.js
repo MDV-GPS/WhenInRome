@@ -28,6 +28,7 @@ function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $w
     // Querying Geocode API to get ZIP code of {{location}} search input to pass to ItinFactory
     $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
       .success(function (data) {
+        console.log("Geocode result", data)
         ItinFactory.searchZip = data.results[0].formatted_address.slice(-10).slice(0, 5);
       });
 

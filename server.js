@@ -21,10 +21,12 @@ mongoose.connect('mongodb://nmarentes:beekeepers17@ds049211.mlab.com:49211/nativ
 const db = mongoose.connection.once('open', () => {
     console.log('Connected to mongodb with mongoose');
 });
+
 db.on('error', console.error.bind(console, 'connection error: '));
 // ***END OF DATABASE SETUP ***
 // Google Maps API Key: AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig
 // GET request to /itins serves up ALL itins in DB. You can also see at http://localhost:3000/itins
+
 app.get('/itins', function(req, res) {
   Models.Itinerary.find({}, function(err, itins){
     if(err) return console.error(err);
@@ -35,6 +37,7 @@ app.get('/itins', function(req, res) {
 app.post('/create', function(req, res) {
     Models.Itinerary.create(req.body, function(err, created) {
       if(err) return console.error(err);
+      console.log('req.body',req.body)
       res.send(req.body);
     });
 });
@@ -104,7 +107,6 @@ app.post('/getFriends', (req, res) =>{
       });
     });
 });
-
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
