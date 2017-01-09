@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Models = require('./database/models');
 const cors = require('cors');
+const request = require('request');
 
 app.use(express.static(path.join(__dirname, './node_modules/')));
 app.use(express.static(path.join(__dirname, './client/')));
@@ -75,12 +76,12 @@ app.post('/user/valid', (req, res) =>{
 
 //FIXME does not search if a user already exists before adding
 app.post('/findFriend', (req, res) =>{
-    Models.User.findOne({username: req.body.friend}, (err, user) =>{
-        if(err) return console.error(err);
-        if(!user) return res.json(false);
+  Models.User.findOne({username: req.body.friend}, (err, user) =>{
+    if(err) return console.error(err);
+    if(!user) return res.json(false);
 
-        res.json({username: user.username, zip: user.zip});
-    });
+    res.json({username: user.username, zip: user.zip});
+  });
 });
 
 app.post('/addFriend', (req, res) =>{
@@ -96,17 +97,30 @@ app.post('/addFriend', (req, res) =>{
   });
 });
 
-app.post('/getFriends', (req, res) =>{
-    Models.User.findOne({username: req.body.username}, (err, user) =>{
-      if(err) return console.error(err);
+app.post('/getFriends', (req, res) => {
+  Models.User.findOne({username: req.body.username}, (err, user) =>{
+    if(err) return console.error(err);
 
-      Models.User.find({username: {$in: user.friends}}, (err, users) =>{
-        if(err) return console.error(err);
-        users = users.map((user) =>{ return {username: user.username, zip: user.zip}; });
-        return res.json(users);
-      });
+    Models.User.find({username: {$in: user.friends}}, (err, users) =>{
+      if(err) return console.error(err);
+      users = users.map((user) =>{ return {username: user.username, zip: user.zip}; });
+      return res.json(users);
     });
+  });
 });
+
+app.get('/searchLocation', (req, res) => {
+  request({
+    uri: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + req.query.query + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig'
+  }).pipe(res);
+});
+
+
+app.get('/curLocation', (req, res) => {
+  request({
+    uri: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + req.query.latitude + ',' + req.query.longitude + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig'
+  }).pipe(res);
+})
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
