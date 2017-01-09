@@ -4,7 +4,7 @@ angular
 
   function UserFactory(){
     return {
-      username: 'Local',
+      username: 'dhani',
       password: 'default',
       zip: '90000',
       interest: 'Bakersfield'

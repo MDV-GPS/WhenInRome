@@ -1,0 +1,15 @@
+@keyframes profile-menu-out{
+  0%{
+    height: 0;
+  }
+
+  100%{
+    height: 112px;
+  }
+}
+
+
+body .openMenu{
+  /*animation: profile-menu-out .4s;*/
+  height: 112px;
+}

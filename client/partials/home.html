@@ -1,11 +1,17 @@
-
-<div id="homeContainer">
+<div id="homeContainer" ng-click='clickDelegation($event)'>
   <div id="menu">
     <a ng-href="/#/home">Home</a>
     <a ng-href="/#/createItin">Design Itinerary</a>
   </div>
-  <input type='button' class='profile-button' ng-click='openProfile' ng-value='username' />
-  <!-- <img class='rome-button' src='http://romanmedicine.co.uk/files/2013/04/Galen2.png' alt='Do as they do' /> -->
+  <input type='button' class='profile-button' ng-click='openProfile()' ng-value='username' />
+  <div class='profile-menu'>
+    <ul ng-class='menuStyle'>
+      <li class='profile-itineraries-button' ng-click='gotoMyItineraries()'>My Itineraries</li>
+      <li class='profile-favorites-button' ng-click='gotoFavorites()'>Favorites</li>
+      <li class='profile-friends-button' ng-click='gotoFriends()'>Friends</li>
+      <li class='profile-logout-button' ng-click='logout()'>Logout</li>
+    </ul>
+  </div>
   <h2 class='locals-recommend'>Show me what the locals recommend</h2>
 
 <!--The below utilizes the ngmap places-auto-complete directive
@@ -14,7 +20,7 @@
 
 <button ng-click="getLocation()"> Use Current Location </button>
 
-<p>
+<p class='current-search'>
  Your Current Search Area is: </br> {{location}}
 </p>
 
