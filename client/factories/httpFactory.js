@@ -38,13 +38,14 @@ angular
       });
     };
 
-    service.createItin = (title, author, authorLocation, authorZip, stops) => {
+    service.createItin = (title, author, authorLocation, authorZip, stops, icon) => {
       const data = {
         title: title,
         author: author,
         authorLocation:  authorLocation,
         authorZip: authorZip,
-        stops: stops
+        stops: stops,
+        iconLink: icon
       }
       return http.post('/create', data)
       .then(() => {});

@@ -23,6 +23,7 @@ const itinerarySchema = new mongoose.Schema({
   authorLocation: String,
   authorZip: String,
   stops: [stopSchema],
+  iconLink: String,
   created: { type: Date, default: Date.now }
 });
 
