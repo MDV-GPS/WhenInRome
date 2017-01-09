@@ -5,10 +5,12 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Models = require('./database/models');
+const cors = require('cors');
 
 app.use(express.static(path.join(__dirname, './node_modules/')));
 app.use(express.static(path.join(__dirname, './client/')));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 app.use(bodyParser.json());
 // ***DATABASE SETUP***
 // Using a Hosted MongoDB @ https://mlab.com/ account.
