@@ -14,7 +14,11 @@ function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $w
         $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
           .success(function (data) {
             console.log("Full Data returned from getLocation", data.results[0]);
-            $scope.location = data.results[0].formatted_address;
+            console.log("address components",data.results[0].address_components[2].long_name)
+            //$scope.location = data.results[0].formatted_address;
+            $scope.city = data.results[0].address_components[2].long_name;
+            //ParamsFactory
+
           });
       });
     }
@@ -34,6 +38,7 @@ function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $w
 
     // Making a GET request for ALL itins upon search click and saving to ItinFactory
     // Redirecting to feed
+
     $http.get('/itins').then(function (data) {
       ItinFactory.currentItins = data.data;
       window.location = '/#/feed';
