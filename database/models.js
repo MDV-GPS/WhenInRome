@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   zip: String,
   interest: String,
   friends: [],
-  itineraries: []
+  itineraries: [],
+  favorites: []
 });
 
 const stopSchema = new mongoose.Schema({

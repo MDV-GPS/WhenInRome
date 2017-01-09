@@ -26,8 +26,11 @@ angular
     };
 
     service.getFriends = (username) =>{
-      return http.post('/getFriends', {username: username}).then((result) =>{
-        return result.data});
+      return http.post('/getFriends', {username: username}).then((result) =>{ return result.data});
+    };
+
+    service.getItineraries = (criteria) =>{
+      return http.post('/getItineraries', criteria).then((result) =>{ return result.data});
     };
 
     return service;
