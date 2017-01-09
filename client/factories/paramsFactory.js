@@ -4,6 +4,6 @@ angular
 
   function paramsFactory(){
     return {
-      params: 'no params yet'
+      params: {}
     };
   }

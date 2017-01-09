@@ -1,7 +1,7 @@
 angular
   .module('ItineraryController', ['ngRoute', 'HttpFactory'])
-  .controller('ItineraryController', ['$scope', '$window', 'HttpFactory', controller]);
+  .controller('ItineraryController', ['$scope', '$window', 'HttpFactory', itineraryController]);
 
-  function controller($scope, $window, HttpFactory){
-
+  function itineraryController($scope, $window, HttpFactory){
+    HttpFactory.getItinerary(ParamFactory.params.itineraryName)
 }

@@ -21,6 +21,7 @@
     "google-images-scraper": "^1.0.9",
     "mongoose": "^4.7.6",
     "ngmap": "^1.17.8",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "request": "^2.79.0"
   }
 }
