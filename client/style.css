@@ -139,6 +139,8 @@ a {
   height: 200px;
   min-width: 200px;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .recentAuthor, .recentTitle{
@@ -160,10 +162,23 @@ a {
 }
 
 .feed-item {
-  height: 305px;
-  width: 95%;
+  margin: auto;
+  height: 200px;
+  width: 50%;
   margin-bottom: 10px;
   border: 1px solid black;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+#feedButton {
+  background-color: white;
+  color: rgb(38, 61, 96);
+}
+
+#feedIntro {
+  margin: auto;
+  text-align: center;
 }
 
 .stops {
@@ -221,7 +236,7 @@ fieldset {
 
 #loginError{
   padding: 10px;
-  height: 40px;
+  height: 60px;
   width: 290px;
   background-color: white;
   border-radius: 20px;

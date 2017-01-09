@@ -9,7 +9,9 @@ $scope.currentItins = ItinFactory.currentItins;
 $scope.searchZip = ItinFactory.searchZip;
 
 //logging searchZip
-console.log($scope.searchZip);
+console.log('searchZip', $scope.searchZip);
+console.log('itins',$scope.currentItins);
+console.log(ItinFactory)
 
 
 

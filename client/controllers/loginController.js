@@ -4,7 +4,6 @@ angular
 
   function loginController($scope, $window, HttpFactory, UserFactory){
 
-
   	$scope.loginFunc = function(){
       document.getElementById('username').value = '';
       document.getElementById('password').value = '';
@@ -20,24 +19,19 @@ angular
            console.log(UserFactory);
            console.log(data);
 
-
-  					$window.location.href = '#/home'
+  	     		$window.location.href = '#/home'
   				}
   				else{
             
   					let big = document.querySelector( '#big' );
           
            big.style.display = 'block'
-          
-
 
   				}
   			}
   		)
 
-  	};
-
-
+  	}
     
     $scope.errorFunc = function(){
     let big = document.querySelector( '#big' );
@@ -48,8 +42,6 @@ angular
     let big = document.querySelector( '#dig' );
     big.style.display = 'none';
     };
-
-
   
   	$scope.signupFunc = function(){
       document.getElementById('createUsername').value = '';
@@ -69,12 +61,10 @@ angular
         }
         
       }
-  			
 
   		)
 
   	}
-   
-
+  
 
   }

@@ -1,8 +1,9 @@
 angular
-  .module('solo.HomeController', ['ngRoute', 'ngMap', 'solo.ItinFactory', 'UserFactory', 'HttpFactory', 'ParamsFactory'])
+  .module('solo.HomeController', ['ngRoute', 'ngMap', 'solo.ItinFactory',
+   'UserFactory', 'HttpFactory', 'ParamsFactory', 'ProfileFactory'])
   .controller('HomeController', HomeController);
 
-function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $window, ParamsFactory) {
+function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $window, ParamsFactory, ProfileFactory) {
   $scope.username = UserFactory.username;
   $scope.menuStyle = '';
 
@@ -27,6 +28,7 @@ function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $w
     // Querying Geocode API to get ZIP code of {{location}} search input to pass to ItinFactory
     $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
       .success(function (data) {
+        console.log("Geocode result", data)
         ItinFactory.searchZip = data.results[0].formatted_address.slice(-10).slice(0, 5);
       });
 
@@ -45,56 +47,28 @@ function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $w
     //HttpFactory.getLandscape('pig');
 
     $scope.landscapes = [
-      {'background': 'url(https://media-cdn.tripadvisor.com/media/photo-s/03/9b/2d/c3/chicago.jpg)'},
-      {'background': 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Beach_bikepath_in_the_Venice_Beach_park,_California.jpg/250px-Beach_bikepath_in_the_Venice_Beach_park,_California.jpg)'},
-      {'background': 'url(https://c.tadst.com/gfx/750x500/roman-calendar.jpg?1)'}
+      {'background-image': 'url(http://blog.worldcraze.com/wp-content/uploads/2016/03/road-trip-hillaryfox.jpg)'},
+      {'background-image': 'url(http://www.dailystormer.com/wp-content/uploads/2014/07/Walk-in-the-Park.jpg)'},
+      {'background-image': 'url(http://www.simwings.net/wp-content/uploads/2015/12/plane-flying.jpg)'}
     ];
 
     $scope.lastThree = recent;
   });
 
+  $scope.gotoMyItineraries = ProfileFactory.gotoMyItineraries;
+  $scope.gotoFavorites = ProfileFactory.gotoFavorites;
+  $scope.gotoFriends = ProfileFactory.gotoFriends;
+  $scope.logout = ProfileFactory.logout;
+
+  $scope.gotoItinerary = (itinerary) =>{
+    ParamsFactory.params = {type: 'other', name: itinerary};
+    $window.location.href = '#/itinerary';
+  }
+
   $scope.clickDelegation = (event) =>{
     if(event.target.className.indexOf('profile') === -1){
       $scope.menuStyle = '';
     }
-  };
-
-  $scope.gotoMyItineraries = () =>{
-    ParamsFactory.params = {type: 'personal'};
-    $window.location.href = '#/myitineraries';
-  };
-
-  $scope.gotoFavorites = () =>{
-    ParamsFactory.params = {type: 'favorites'};
-    $window.location.href = '#/feed';
-  };
-
-  $scope.gotoFriends = () =>{
-    $window.location.href = '#/friends';
-  };
-
-  $scope.logout = () =>{
-    UserFactory = {
-      username: 'Local',
-      password: 'default',
-      zip: '90000',
-      interest: 'Bakersfield'
-    }
-
-    $window.location.href = '#/';
-  };
-
-  $scope.friends = () =>{
-
-    $window.location.href = '#/friends';
-  };
-
-  $scope.myItineraries = () =>{
-    $window.location.href = '#/feed';
-  };
-
-  $scope.favorites = () =>{
-    $window.location.href = '#/favorites';
   };
 
   $scope.openProfile = () =>{
