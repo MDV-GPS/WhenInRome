@@ -1,6 +1,18 @@
+*{
+  box-sizing: border-box;
+}
+
+head, title{
+  display: none;
+}
+
 html, body {
   background-color: rgb(38, 61, 96);
   color: white;
+  background-image: url('http://www.domusdiana.it/skyline.png');
+  background-size: 1000px 200px;
+  background-repeat: no-repeat;
+  background-position:bottom;
 }
 
 a {
@@ -12,13 +24,10 @@ a {
 }
 
 #menu {
-
-  height: 50px;
-  width: 100%;
-  margin: 0 auto;
-  background-color: rgb(38, 61, 96);
-  display: flex;
+  color: white;
   display: inline-block;
+  position: absolute;
+  left: 2px; top: 2px;
 }
 
 
@@ -27,6 +36,40 @@ a {
   text-align: center;
   margin: auto;
   background-color: rgb(38, 61, 96);
+  position: relative;
+}
+
+.profile-button{
+  position: absolute;
+  top: 10px; right: 15px;
+  background-color: transparent;
+  border: 1px solid gold;
+  color: inherit;
+  border-radius: 2px;
+  padding: 4px;
+}
+
+.profile-button:hover{
+  /*color: rgb(38, 61, 96);*/
+  background-color: #495d7a;
+}
+
+.rome-button{
+  border-radius: 50%;
+  width: 85px;
+  height: 100px;
+  position: absolute;
+  left: 15%;
+  top: 4rem;
+  /*border: 1px gold solid;*/
+}
+
+.locals-recommend{
+  padding-top: 3rem;
+}
+
+.google-map{
+  margin-top: 3rem;
 }
 
 /*STYLE FOR CREATE */
@@ -36,6 +79,36 @@ a {
     background-color: rgb(38, 61, 96);
 }
 
+#recentlyCreated{
+  margin: 3rem 1rem 1rem;
+}
+
+#recentlyCreated > div{
+  display: flex;
+  padding: 10px;
+  width: 100%;
+}
+
+#recentlyCreated h3{
+  display: block;
+}
+
+.recentItin{
+  flex: 1;
+  border: 1px solid white;
+  margin: 0 10px;
+  text-align: center;
+  height: 200px;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+.recentAuthor, .recentTitle{
+  display: block;
+  width: 100%;
+  font: 22px Arial;
+  background-color: rgba(0,0,0, .7);
+}
 
   /*END OF STYLES FOR HOME*/
 
@@ -103,5 +176,32 @@ fieldset {
 }
 
 #loginContainer {
-  text-align: center
+  text-align: center;
+  
+
+}
+
+#loginError{
+  padding: 10px;
+  height: 40px;
+  width: 290px;
+  background-color: white;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 20px;
+  color:red
+}
+
+.logButton {
+  margin-top: 15px
+}
+
+#big {
+  display:none;
+
+}
+
+#dig {
+  margin-top: 20px;
+  display: none;
 }

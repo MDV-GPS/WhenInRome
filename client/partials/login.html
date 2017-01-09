@@ -2,17 +2,23 @@
 <div id="loginContainer">
 	<h1>When in Rome</h1>
 
-
 	<div id="logindiv">
 		<h2 class="title1"> Login </h2>
 
-
-		<form ng-submit='loginFunc(username, password)'>
-			Username: <input ng-model="username" id='username'/><br/>
-			Password: <input ng-model="password" id='password'/><br/>
-			<button type="submit">Submit</button>
+		<form style='' id='formLogin' ng-submit='loginFunc(username, password)'>
+			Username: <input autocomplete="off" ng-model="username" id='username'/><br/>
+			Password: <input style='margin-left:3px' autocomplete="off" type="password" ng-model="password" id='password'/><br/>
+			<button class='logButton' type="submit">Login</button><button style='margin-left:10px' class='logButton' type="submit">Forgot Password?</button>
 		</form>
 
+		 <div id='big'>
+              <div id='loginError'>
+                  <p>Login failed! Try a different password or create an account below.</p>
+              </div>
+
+              <button ng-click='errorFunc()' class='logButton'>Ok</button>
+
+              </div>
 
 	</div>
 
@@ -21,13 +27,22 @@
 
 
 		<form ng-submit='signupFunc(createUsername, createPassword, createZipcode, createInterest)'>
-			Username: <input ng-model="createUsername" id='createUsername'/><br/>
-			Password: <input ng-model="createPassword" id='createPassword'/><br/>
-			Zipcode: <input ng-model="createZipcode" id='createZipcode'/><br/>
-			Interest: <input ng-model="createInterest" id='createInterest'/><br/>
+			Username: <input autocomplete="off" ng-model="createUsername" id='createUsername'/><br/>
+			Password: <input style='margin-left:3px' autocomplete="off" type="password" ng-model="createPassword" id='createPassword'/><br/>
+			Zipcode: <input style='margin-left:15px' autocomplete="off" ng-model="createZipcode" id='createZipcode'/><br/>
+			Interest: <input style='margin-left:20px' autocomplete="off" ng-model="createInterest" id='createInterest'/><br/>
 
-			<button type="submit">Submit</button>
+			<button class='logButton' type="submit">Get Started!</button>
 		</form>
+
+		 <div id='dig'>
+              <div id='digError'>
+                  <p>Sign-up failed! Please properly complete the form.</p>
+              </div>
+
+              <button ng-click='berrorFunc()' class='logButton'>Ok</button>
+
+              </div>
 		</div>
 
 </div>
