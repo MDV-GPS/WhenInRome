@@ -37,7 +37,7 @@ angular
 
     service.getItineraries = (criteria) =>{
       return http.post('/getItineraries', criteria).then((result) =>{ return result.data});
-
+    };
     service.createItin = (title, author, authorLocation, authorZip, stops, icon) => {
       const data = {
         title: title,

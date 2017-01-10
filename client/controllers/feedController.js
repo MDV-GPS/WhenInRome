@@ -1,23 +1,25 @@
 angular
-  .module('solo.feedController', ['ngRoute', 'solo.ItinFactory', 'ParamsFactory'])
+  .module('solo.feedController', ['ngRoute', 'solo.ItinFactory', 'ParamsFactory', 'HttpFactory'])
   .controller('feedController', feedController);
 
-function feedController($scope, ItinFactory, ParamsFactory) {
+function feedController($scope, ItinFactory, ParamsFactory, HttpFactory) {
 
-	// let params = ParamsFactory.params;
-	// if (params.type === 'zip'){
-	// 	return httpFactory.getItineraries({'type':'zip', 'code': params.code})
-
-	// }
-	// else if (params.type === 'city'){
-	// 	return httpFactory.getItineraries({'type': 'city', 'name': params.name})
-	// }
-
-	// else if (params.type === )
 
 //setting scope to ItinFactory's currentItins. Giving us access to that array of itineraries
-$scope.currentItins = ItinFactory.currentItins;
-$scope.searchZip = ItinFactory.searchZip;
+//$scope.currentItins = service.getItineraries
+
+if (ParamsFactory.params !== {}){
+	HttpFactory.getItineraries(ParamsFactory.params).then(function(data){
+		console.log("data!!!!!!!!!",data);
+		$scope.currentItins = data;
+		
+		
+
+})
+}
+
+//$scope.searchZip = ItinFactory.searchZip;
+//$scope.searchCity = ParamsFactory.name;
 
 //logging searchZip
 console.log('searchZip', $scope.searchZip);

@@ -13,7 +13,7 @@
     as a template, and use each item in the array it's populating from with a new template
     we are filtering which items will be populated, using filter: searchZip. It will only display the itins that have a matching zip.
      -->
-    <div class="feed-item" ng-repeat='itinerary in currentItins | filter: searchZip'>
+    <div class="feed-item" ng-repeat='itinerary in currentItins '>
 
       <!-- {{}} double curly brackets used to access variables on an angular partial. set variable to the scope on the controller for this partial -->
       <h1>{{itinerary.title}}</h1>
