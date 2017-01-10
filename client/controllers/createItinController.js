@@ -1,8 +1,8 @@
 angular
   .module('solo.createItinController', ['ngRoute', 'ngMap'])
-  .controller('createItinController', ['$scope', '$location', '$http',  '$window', 'UserFactory', 'HttpFactory', 'ProfileFactory', createItinController]);
+  .controller('createItinController', ['$scope', '$location', '$http', '$window', 'UserFactory', 'HttpFactory', 'ProfileFactory', createItinController]);
 
-function createItinController($scope, $location, $http, $window, ItinFactory, UserFactory, HttpFactory, ProfileFactory) {
+function createItinController($scope, $location, $http, $window, UserFactory, HttpFactory, ProfileFactory) {
   $scope.username = UserFactory.username;
   $scope.menuStyle = '';
   //HOLDS ALL STOPS ADDED TO ITINERARY

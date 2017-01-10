@@ -124,6 +124,7 @@ app.post('/getItineraries', (req, res) =>{
           return res.json(itins);
         });
       }else{
+        //finding current user's itineraries
         Models.Itinerary.find({title: {$in: user.itineraries}}, (err, itins) =>{
           if(err) return console.error(err);
           return res.json(itins);

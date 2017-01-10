@@ -9,6 +9,7 @@ function controller($scope, ItinFactory, UserFactory, HttpFactory, $window, Para
   $scope.friend = '';
   $scope.friendMessage = '';
   $scope.friendSuccess =  {visibility: 'hidden'};
+  $scope.friendRoute =  [];
 
   HttpFactory.getFriends(UserFactory.username).then((friends) =>{
     $scope.friends = friends;
@@ -53,13 +54,27 @@ function controller($scope, ItinFactory, UserFactory, HttpFactory, $window, Para
     });
   }
 
+  $scope.showFriendRoute = (index) =>{
+    console.log('in show FriendRoute');
+    $scope.friendRoute[index] = {display: 'block'};
+  };
+
+  $scope.hideFriendRoute = (index) =>{
+    $scope.friendRoute[index] = {display: 'none'};
+  };
+
   $scope.gotoMyItineraries = ProfileFactory.gotoMyItineraries;
   $scope.gotoFavorites = ProfileFactory.gotoFavorites;
   $scope.gotoFriends = ProfileFactory.gotoFriends;
   $scope.logout = ProfileFactory.logout;
 
-  $scope.friendsItineraries = (friend) =>{
-    ParamsFactory.params = {type: 'user', username: friend};
+  $scope.friendItineraries = (friend) =>{
+    ParamsFactory.params = {type: 'user', name: friend};
+    $window.location.href = '#/feed';
+  };
+
+  $scope.friendFavorites = (friend) =>{
+    ParamsFactory.params = {type: 'favorites', name: friend};
     $window.location.href = '#/feed';
   };
 

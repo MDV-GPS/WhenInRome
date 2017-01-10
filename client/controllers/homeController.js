@@ -1,9 +1,9 @@
 angular
-  .module('solo.HomeController', ['ngRoute', 'ngMap', 'solo.ItinFactory',
+  .module('solo.HomeController', ['ngRoute', 'ngMap',
    'UserFactory', 'HttpFactory', 'ParamsFactory', 'ProfileFactory'])
   .controller('HomeController', HomeController);
 
-function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $window, ParamsFactory, ProfileFactory) {
+function HomeController($scope, $http, UserFactory, HttpFactory, $window, ParamsFactory, ProfileFactory) {
   $scope.username = UserFactory.username;
   $scope.menuStyle = '';
 
@@ -66,7 +66,7 @@ function HomeController($scope, ItinFactory, $http, UserFactory, HttpFactory, $w
   $scope.logout = ProfileFactory.logout;
 
   $scope.gotoItinerary = (itinerary) =>{
-    ParamsFactory.params = {type: 'other', name: itinerary};
+    ParamsFactory.params = {type: 'city', name: itinerary};
     $window.location.href = '#/itinerary';
   }
 
