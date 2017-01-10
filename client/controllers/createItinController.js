@@ -81,10 +81,10 @@ function createItinController($scope, $location, $http, $window, UserFactory, Ht
     }
   }
 
-  // $scope.gotoMyItineraries = ProfileFactory.gotoMyItineraries;
-  // $scope.gotoFavorites = ProfileFactory.gotoFavorites;
-  // $scope.gotoFriends = ProfileFactory.gotoFriends;
-  // $scope.logout = ProfileFactory.logout;
+   $scope.gotoMyItineraries = ProfileFactory.gotoMyItineraries;
+   $scope.gotoFavorites = ProfileFactory.gotoFavorites;
+   $scope.gotoFriends = ProfileFactory.gotoFriends;
+   $scope.logout = ProfileFactory.logout;
 
   $scope.clickDelegation = (event) =>{
     if(event.target.className.indexOf('profile') === -1){
