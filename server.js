@@ -108,11 +108,14 @@ app.post('/getFriends', (req, res) => {
 
 
 app.post('/getItineraries', (req, res) =>{
-  console.log('given data: ', req.body);
+  console.log('given data: ', req.body.name);
   if(req.body.type === 'city'){
-    Models.Itinerary.findAll({authorLocation: req.body.name}, (err, itins) =>{
+    
+    Models.Itinerary.find({authorLocation: req.body.name}, (err, itins) =>{
+      console.log("itins!!!!!!", itins);
       if(err) return console.error(err);
       return res.json(itins);
+
     });
   }else{
     Models.User.findOne({username: req.body.name}, (err, user) =>{
@@ -124,7 +127,7 @@ app.post('/getItineraries', (req, res) =>{
           return res.json(itins);
         });
       }else{
-        Models.Itinerary.find({title: {$in: user.itineraries}}, (err, itins) =>{
+        Models.Itinerary.find({authorLocation: {$in: user.itineraries}}, (err, itins) =>{
           if(err) return console.error(err);
           return res.json(itins);
         });
