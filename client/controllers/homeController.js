@@ -1,32 +1,28 @@
 angular
   .module('solo.HomeController', ['ngRoute', 'ngMap',
-   'UserFactory', 'HttpFactory', 'ParamsFactory', 'ProfileFactory'])
+    'UserFactory', 'HttpFactory', 'ParamsFactory', 'ProfileFactory'])
   .controller('HomeController', HomeController);
 
 function HomeController($scope, $http, UserFactory, HttpFactory, $window, ParamsFactory, ProfileFactory) {
   $scope.username = UserFactory.username;
   $scope.menuStyle = '';
 
-  // getLocation uses HTML5 geolocation then passes those coords into google maps geocode to get a formatted address
+  // getLocation uses HTML5 geolocation then passes those
+  // coords into google maps geocode to get a formatted address
   $scope.getLocation = function () {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+      navigator.geolocation.getCurrentPosition((position) => {
         $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyD5p6W-TtJzphQvH7dRLKyB968SiTXHxig')
-          .success(function (data) {
-            console.log("Full Data returned from getLocation", data.results[0]);
-            console.log("address components",data.results[0].address_components[2].long_name)
-            //$scope.location = data.results[0].formatted_address;
-
-            let cityName = data.results[0].address_components[2].long_name;
-            ParamsFactory.params = {type: 'city', name: cityName};
-
-
+          .success((data) => {
+            $scope.location = data.results[0].formatted_address;
+            const cityName = data.results[0].address_components[2].long_name;
+            ParamsFactory.params = { type: 'city', name: cityName };
           });
       });
     }
   };
 
-  $scope.searchLocation = function (location) {
+  $scope.searchLocation = (location) => {
     if (!location) {
       alert('NO SEARCH QUERY');
       return;
@@ -38,7 +34,7 @@ function HomeController($scope, $http, UserFactory, HttpFactory, $window, Params
     //     ItinFactory.searchZip = data.results[0].formatted_address.slice(-10).slice(0, 5);
     //   });
 
-    ParamsFactory.params = {type: 'city', name: location};
+    ParamsFactory.params = { type: 'city', name: location };
     window.location = '/#/feed';
 
     // Making a GET request for ALL itins upon search click and saving to ItinFactory
@@ -52,15 +48,15 @@ function HomeController($scope, $http, UserFactory, HttpFactory, $window, Params
   };
 
   // initializing pull of last three submitted itineraries
-  $http.get('/itins').then(function (data) {
-    let recent = data.data.slice(-3);
+  $http.get('/itins').then((data) => {
+    const recent = data.data.slice(-3);
 
-    //HttpFactory.getLandscape('pig');
+    // HttpFactory.getLandscape('pig');
 
     $scope.landscapes = [
-      {'background-image': 'url(http://blog.worldcraze.com/wp-content/uploads/2016/03/road-trip-hillaryfox.jpg)'},
-      {'background-image': 'url(http://www.dailystormer.com/wp-content/uploads/2014/07/Walk-in-the-Park.jpg)'},
-      {'background-image': 'url(http://www.simwings.net/wp-content/uploads/2015/12/plane-flying.jpg)'}
+      { 'background-image': 'url(http://blog.worldcraze.com/wp-content/uploads/2016/03/road-trip-hillaryfox.jpg)' },
+      { 'background-image': 'url(http://www.dailystormer.com/wp-content/uploads/2014/07/Walk-in-the-Park.jpg)' },
+      { 'background-image': 'url(http://www.simwings.net/wp-content/uploads/2015/12/plane-flying.jpg)' }
     ];
 
     $scope.lastThree = recent;
@@ -71,21 +67,21 @@ function HomeController($scope, $http, UserFactory, HttpFactory, $window, Params
   $scope.gotoFriends = ProfileFactory.gotoFriends;
   $scope.logout = ProfileFactory.logout;
 
-  $scope.gotoItinerary = (itinerary) =>{
-    ParamsFactory.params = {itineraryName: itinerary};
+  $scope.gotoItinerary = (itinerary) => {
+    ParamsFactory.params = { itineraryName: itinerary };
     $window.location.href = '#/itinerary';
-  }
+  };
 
-  $scope.clickDelegation = (event) =>{
-    if(event.target.className.indexOf('profile') === -1){
+  $scope.clickDelegation = (event) => {
+    if (event.target.className.indexOf('profile') === -1) {
       $scope.menuStyle = '';
     }
   };
 
-  $scope.openProfile = () =>{
-    if($scope.menuStyle === ''){
+  $scope.openProfile = () => {
+    if ($scope.menuStyle === '') {
       $scope.menuStyle = 'openMenu';
-    }else{
+    } else {
       $scope.menuStyle = '';
     }
   };
