@@ -1,6 +1,6 @@
 
 const app = angular
-  .module('myApp', ['ngRoute', 'solo.HomeController','solo.feedController',
+  .module('myApp', ['ngRoute', 'solo.HomeController', 'solo.feedController',
     'solo.ItinFactory', 'solo.createItinController', 'solo.loginController', 'UserFactory', 'HttpFactory',
     'ParamsFactory', 'FriendsController', 'ProfileFactory', 'ItineraryController']);
 
