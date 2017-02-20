@@ -15,7 +15,7 @@ function HomeController($scope, $http, UserFactory, HttpFactory, $window, Params
           .success(function (data) {
             console.log("Full Data returned from getLocation", data.results[0]);
             console.log("address components",data.results[0].address_components[2].long_name)
-            //$scope.location = data.results[0].formatted_address;
+            $scope.location = data.results[0].formatted_address;
 
             let cityName = data.results[0].address_components[2].long_name;
             ParamsFactory.params = {type: 'city', name: cityName};
